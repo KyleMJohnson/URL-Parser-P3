@@ -24,25 +24,26 @@ int main()
 	for (int i = 0; i < URL.length(); ++i) {
 		if (URL.at(i) == ':') {
 			//concatenate onto scheme, mark location, then exit
+			scheme += URL.at(i);
 			j = i;
 			break;
 		}
 		else {
 			//add to scheme
-			scheme += scheme + URL.at(i);
+			scheme += URL.at(i);
 		}
 	}
 
 	for (int i = j; i < URL.length(); ++i) {
 		if (URL.at(i) == '/') {
 			//check if third time here. if true continue if false add one to count then continue
-			//don't concatenate onto authority, mark location globally, then exit
+			//don't concatenate onto authority, mark location , then exit
 			if (slash >= 3) {
 				slash++;
 				k = i;
 			}
 			else {
-
+				//concatenate onto authority, mark location, then exit
 			}
 			
 		}
