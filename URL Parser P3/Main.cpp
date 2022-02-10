@@ -15,17 +15,17 @@ int main()
 	int k = 0;
 	int slash = 0;
 
-//	//input string from console
-//	std::cout << "Enter URL: ";
-//	std::cin >> URL;
+	//input string from console
+	std::cout << "Please enter a URL: ";
+	std::cin >> URL;
 
-	URL = "https://gmail.com/";
+//	URL = "https://gmail.com/";
 
 	for (int i = 0; i < URL.length(); ++i) {
 		if (URL.at(i) == ':') {
 			//concatenate onto scheme, mark location, then exit
 			scheme += URL.at(i);
-			j = i;
+			j = ++i;
 			break;
 		}
 		else {
@@ -38,27 +38,31 @@ int main()
 		if (URL.at(i) == '/') {
 			//check if third time here. if true continue if false add one to count then continue
 			//don't concatenate onto authority, mark location , then exit
-			if (slash >= 3) {
-				slash++;
+			if (slash >= 2) {
 				k = i;
+				break;
 			}
 			else {
-				//concatenate onto authority, mark location, then exit
+				//concatenate onto authority
+				authority += URL.at(i);
+				slash++;
 			}
 			
 		}
 		else {
 			//add to authority
+			authority += URL.at(i);
 		}
 	}
 
-	for (int i = j; i < URL.length(); ++i) {
+	for (int i = k; i < URL.length(); ++i) {
 		if (URL.at(i) == '\0') {
-			//concatenate onto path then exit
-			k = i;
+			//exit and finish
+			break;
 		}
 		else {
-			//add to authority
+			//add to path
+			path += URL.at(i);
 		}
 	}
 
@@ -66,11 +70,11 @@ int main()
 
 
 	//print out defined string
-	//std::cout << "\nscheme = " << scheme;
+	std::cout << "\nscheme = " << scheme;
 
 	//print out defined authority
-	//std::cout << "\nauthority = " << authority;
+	std::cout << "\nauthority = " << authority;
 
 	//print out defined authority
-	//std::cout << "\nscheme = " << scheme;
+	std::cout << "\npath = " << path;
 }
